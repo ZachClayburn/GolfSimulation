@@ -22,7 +22,7 @@ function varargout = MainGUI(varargin)
 
 % Edit the above text to modify the response to help MainGUI
 
-% Last Modified by GUIDE v2.5 11-Apr-2017 12:25:00
+% Last Modified by GUIDE v2.5 11-Apr-2017 12:45:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,19 +73,36 @@ function varargout = MainGUI_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-% --- Executes on selection change in clubMenu.
-function clubMenu_Callback(hObject, eventdata, handles)
-% hObject    handle to clubMenu (see GCBO)
+% --- Executes on selection change in clubType.
+function clubType_Callback(hObject, eventdata, handles)
+% hObject    handle to clubType (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns clubMenu contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from clubMenu
+% Hints: contents = cellstr(get(hObject,'String')) returns clubType contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from clubType
+list = cellstr(get(hObject,'String'));
+index = get(hObject,'Value');
+
+switch list{index}
+    case 'Driver'
+        disp(list{index})
+        toggleClubNumberMenu(handles, false());
+    case 'Wood'
+        disp(list{index})
+        toggleClubNumberMenu(handles, true(),list{index});
+    case 'Iron'
+        disp(list{index})
+        toggleClubNumberMenu(handles, true(),list{index});
+    case 'Pitching Wedge'
+        disp(list{index})
+        toggleClubNumberMenu(handles, false());
+end
 
 
 % --- Executes during object creation, after setting all properties.
-function clubMenu_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to clubMenu (see GCBO)
+function clubType_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to clubType (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -95,20 +112,30 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
+function toggleClubNumberMenu(handles, isActive, varargin)
 
-% --- Executes on selection change in ClubNumber.
-function ClubNumber_Callback(hObject, eventdata, handles)
-% hObject    handle to ClubNumber (see GCBO)
+if isActive
+    state = 'on';
+else
+    state = 'off';
+end
+handles.clubNumber.Enable = state;
+
+
+
+% --- Executes on selection change in clubNumber.
+function clubNumber_Callback(hObject, eventdata, handles)
+% hObject    handle to clubNumber (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns ClubNumber contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from ClubNumber
+% Hints: contents = cellstr(get(hObject,'String')) returns clubNumber contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from clubNumber
 
 
 % --- Executes during object creation, after setting all properties.
-function ClubNumber_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to ClubNumber (see GCBO)
+function clubNumber_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to clubNumber (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
