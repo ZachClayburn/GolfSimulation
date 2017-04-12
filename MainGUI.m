@@ -22,7 +22,7 @@ function varargout = MainGUI(varargin)
 
 % Edit the above text to modify the response to help MainGUI
 
-% Last Modified by GUIDE v2.5 11-Apr-2017 12:45:16
+% Last Modified by GUIDE v2.5 11-Apr-2017 19:33:29
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -148,6 +148,136 @@ function clubNumber_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on slider movement.
+function powerSlider_Callback(hObject, eventdata, handles)
+% hObject    handle to powerSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+value = get(hObject,'Value');
+
+handles.powerText.String = value;
+
+% --- Executes during object creation, after setting all properties.
+function powerSlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to powerSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+
+function powerText_Callback(hObject, eventdata, handles)
+% hObject    handle to powerText (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of powerText as text
+%        str2double(get(hObject,'String')) returns contents of powerText as a double
+
+max= handles.powerSlider.Max;
+min= handles.powerSlider.Min;
+
+value = str2double(get(hObject,'String'));
+
+if value > max
+    value = max;
+    %Add error message
+elseif value < min
+    value = min;
+    %Add error message
+end
+
+handles.powerText.String = value;
+handles.powerSlider.Value = value;
+
+% guidata(hObject,handles);
+
+% --- Executes during object creation, after setting all properties.
+function powerText_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to powerText (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on slider movement.
+function angleSlider_Callback(hObject, eventdata, handles)
+% hObject    handle to angleSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+value = get(hObject,'Value');
+
+handles.angleText.String = value;
+
+
+% --- Executes during object creation, after setting all properties.
+function angleSlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to angleSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+
+function angleText_Callback(hObject, eventdata, handles)
+% hObject    handle to angleText (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of angleText as text
+%        str2double(get(hObject,'String')) returns contents of angleText as a double
+max= handles.angleSlider.Max;
+min= handles.angleSlider.Min;
+
+value = str2double(get(hObject,'String'));
+
+if value > max
+    value = max;
+    %Add error message
+elseif value < min
+    value = min;
+    %Add error message
+end
+
+handles.angleText.String = value;
+handles.angleSlider.Value = value;
+
+guidata(hObject,handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function angleText_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to angleText (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
