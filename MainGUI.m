@@ -86,16 +86,12 @@ index = get(hObject,'Value');
 
 switch list{index}
     case 'Driver'
-        disp(list{index})
         toggleClubNumberMenu(handles, false());
     case 'Wood'
-        disp(list{index})
         toggleClubNumberMenu(handles, true(),list{index});
     case 'Iron'
-        disp(list{index})
         toggleClubNumberMenu(handles, true(),list{index});
     case 'Pitching Wedge'
-        disp(list{index})
         toggleClubNumberMenu(handles, false());
 end
 
@@ -114,12 +110,24 @@ end
 
 function toggleClubNumberMenu(handles, isActive, varargin)
 
+Wood = {'2','3','4','5','6','7'};
+Iron = {'3','4','5','6','7','8','9'};
+
 if isActive
     state = 'on';
+    switch varargin{1}
+        case 'Wood'
+            string = Wood;
+        case 'Iron'
+            string = Iron;
+    end
 else
     state = 'off';
+    string = 'N/A';
 end
 handles.clubNumber.Enable = state;
+handles.clubNumber.Value = 1;
+handles.clubNumber.String = string;
 
 
 
