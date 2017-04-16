@@ -91,7 +91,7 @@ end
 fraction = percent/100;
 
 % Convert the initial angle to rad
-theta = theta0 * pi/180
+theta = theta0 * pi/180;
 
 % Calculate the initial velocity vector
 v=v0*fraction*.44704;       % convert to m/s from mph
