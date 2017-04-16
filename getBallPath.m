@@ -1,7 +1,15 @@
 function [t,R] = getBallPath(R0,tSpan)%figure out params
 
-[t,R] = ode45(@(t,R) odefun(t,R),tSpan,R0);
+options = odeset('Events',@events);
 
+[t,R] = ode45(@(t,R) odefun(t,R),tSpan,R0,options);
+
+function [value,isterminal,direction] = events(t,R)
+% Locate the time when height passes through zero in a decreasing direction
+% and stop integration.
+value = R(2); % detect y = 0;
+isterminal = 1; % stop the integration
+direction = -1; % negative direction
 
 function RPrime = odefun(~,R)
 
