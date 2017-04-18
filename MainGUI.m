@@ -55,6 +55,8 @@ function MainGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for MainGUI
 handles.output = hObject;
 
+handles.Data.PlotGui = [];
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -462,3 +464,8 @@ function plotButton_Callback(hObject, eventdata, handles)
 % hObject    handle to plotButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+if isempty(handles.Data.PlotGUI)
+    handles.Data.PlotGUI = PlotGUI();
+end
+% keyboard

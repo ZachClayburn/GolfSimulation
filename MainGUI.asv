@@ -55,6 +55,8 @@ function MainGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for MainGUI
 handles.output = hObject;
 
+handles.Data.PlotGui = [];
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -425,10 +427,12 @@ function multiPlot_Callback(hObject, eventdata, handles)
 val = get(hObject,'Value');
 
 if val
-   handles.plotCountMenu.Enabled = 'On';
-   handles.plotCountMenu.String = {'2',
+   handles.plotCountMenu.Enable = 'on';
+   handles.plotCountMenu.String = {'2','3','4','5','6'};
 else
-    
+   handles.plotCountMenu.Enable = 'off';
+   handles.plotCountMenu.String = '1';
+   handles.plotCountMenu.Value = 1;
 end
 
 
@@ -460,3 +464,8 @@ function plotButton_Callback(hObject, eventdata, handles)
 % hObject    handle to plotButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+if isempty(han
+handles.Data.PlotGUI = PlotGUI();
+
+% keyboard
