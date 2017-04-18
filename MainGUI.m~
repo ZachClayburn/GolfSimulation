@@ -473,7 +473,7 @@ plotHandles = guidata(handles.Data.PlotGUI);
 
 plotHandles.Data.R = [];
 
-guidata(handles.Data.PlotGUI,plotHandles);
+guidata(handles,Datat
 guidata(hObject,handles)
 
 % --- Executes on button press in debugButton.
