@@ -43,83 +43,31 @@ else
 end
 % End initialization code - DO NOT EDIT
 
-% --- Executes just before PlotGUI is made visible.
 function PlotGUI_OpeningFcn(hObject, eventdata, handles, varargin)
-% This function has no output args, see OutputFcn.
-% hObject    handle to figure
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to PlotGUI (see VARARGIN)
-
-% Choose default command line output for PlotGUI
 handles.output = hObject;
 
 handles.Data.MainGUI = varargin{1};
-% handles.Data.R = [];
 
-% Update handles structure
 guidata(hObject, handles);
 
-
-% UIWAIT makes PlotGUI wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
-
-
-% --- Outputs from this function are returned to the command line.
 function varargout = PlotGUI_OutputFcn(hObject, eventdata, handles)
-% varargout  cell array for returning output args (see VARARGOUT);
-% hObject    handle to figure
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Get default command line output from handles structure
 varargout{1} = handles.output;
 
-% --- Executes on button press in clearPlot.
 function clearPlot_Callback(hObject, eventdata, handles)
-% hObject    handle to clearPlot (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 axes(handles.axis);
 cla;
 
-% --- Executes on selection change in plotStyle.
 function plotStyle_Callback(hObject, eventdata, handles)
-% hObject    handle to plotStyle (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = get(hObject,'String') returns plotStyle contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from plotStyle
-
-
-% --- Executes during object creation, after setting all properties.
 function plotStyle_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to plotStyle (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
      set(hObject,'BackgroundColor','white');
 end
 
-% --- Executes on button press in debug.
 function debug_Callback(hObject, eventdata, handles)
-% hObject    handle to debug (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 keyboard
 
-
-% --- Executes when user attempts to close figure1.
 function figure1_CloseRequestFcn(hObject, eventdata, handles)
-% hObject    handle to figure1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: delete(hObject) closes the figure
 mainHandles = guidata(handles.Data.MainGUI);
 mainHandles.Data.PlotGUI = [];
 guidata(handles.Data.MainGUI,mainHandles);

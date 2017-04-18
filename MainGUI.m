@@ -43,46 +43,17 @@ else
 end
 % End initialization code - DO NOT EDIT
 
-
-% --- Executes just before MainGUI is made visible.
 function MainGUI_OpeningFcn(hObject, eventdata, handles, varargin)
-% This function has no output args, see OutputFcn.
-% hObject    handle to figure
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to MainGUI (see VARARGIN)
-
-% Choose default command line output for MainGUI
 handles.output = hObject;
 
 handles.Data.PlotGUI = [];
 
-% Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes MainGUI wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
-
-
-% --- Outputs from this function are returned to the command line.
 function varargout = MainGUI_OutputFcn(hObject, eventdata, handles) 
-% varargout  cell array for returning output args (see VARARGOUT);
-% hObject    handle to figure
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Get default command line output from handles structure
 varargout{1} = handles.output;
 
-
-% --- Executes on selection change in clubType.
 function clubType_Callback(hObject, eventdata, handles)
-% hObject    handle to clubType (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: contents = cellstr(get(hObject,'String')) returns clubType contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from clubType
 list = cellstr(get(hObject,'String'));
 index = get(hObject,'Value');
 
@@ -98,14 +69,7 @@ switch list{index}
 end
 
 
-% --- Executes during object creation, after setting all properties.
 function clubType_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to clubType (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
@@ -131,51 +95,20 @@ handles.clubNumber.Enable = state;
 handles.clubNumber.Value = 1;
 handles.clubNumber.String = string;
 
-
-
-% --- Executes on selection change in clubNumber.
 function clubNumber_Callback(hObject, eventdata, handles)
-% hObject    handle to clubNumber (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns clubNumber contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from clubNumber
-
-
-% --- Executes during object creation, after setting all properties.
 function clubNumber_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to clubNumber (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
 
 
-% --- Executes on slider movement.
 function powerSlider_Callback(hObject, eventdata, handles)
-% hObject    handle to powerSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
 value = get(hObject,'Value');
 
 handles.powerText.String = value;
 
-% --- Executes during object creation, after setting all properties.
 function powerSlider_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to powerSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -183,13 +116,6 @@ end
 
 
 function powerText_Callback(hObject, eventdata, handles)
-% hObject    handle to powerText (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of powerText as text
-%        str2double(get(hObject,'String')) returns contents of powerText as a double
-
 max= handles.powerSlider.Max;
 min= handles.powerSlider.Min;
 
@@ -206,54 +132,22 @@ end
 handles.powerText.String = value;
 handles.powerSlider.Value = value;
 
-% guidata(hObject,handles);
-
-% --- Executes during object creation, after setting all properties.
 function powerText_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to powerText (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
 
-
-% --- Executes on slider movement.
 function angleSlider_Callback(hObject, eventdata, handles)
-% hObject    handle to angleSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 value = get(hObject,'Value');
 
 handles.angleText.String = value;
 
-
-% --- Executes during object creation, after setting all properties.
 function angleSlider_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to angleSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
 
-
-
 function angleText_Callback(hObject, eventdata, handles)
-% hObject    handle to angleText (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of angleText as text
-%        str2double(get(hObject,'String')) returns contents of angleText as a double
 max= handles.angleSlider.Max;
 min= handles.angleSlider.Min;
 
@@ -272,40 +166,17 @@ handles.angleSlider.Value = value;
 
 guidata(hObject,handles);
 
-
-% --- Executes during object creation, after setting all properties.
 function angleText_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to angleText (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
 
-
-% --- Executes on slider movement.
 function windPowerSlider_Callback(hObject, eventdata, handles)
-% hObject    handle to windPowerSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 value = get(hObject,'Value');
 
 handles.windPowerText.String = value;
 
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
-
-% --- Executes during object creation, after setting all properties.
 function windPowerSlider_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to windPowerSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -313,9 +184,6 @@ end
 
 
 function windPowerText_Callback(hObject, eventdata, handles)
-% hObject    handle to windPowerText (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 max= handles.windPowerSlider.Max;
 min= handles.windPowerSlider.Min;
 
@@ -334,53 +202,22 @@ handles.windPowerSlider.Value = value;
 
 guidata(hObject,handles);
 
-% Hints: get(hObject,'String') returns contents of windPowerText as text
-%        str2double(get(hObject,'String')) returns contents of windPowerText as a double
-
-
-% --- Executes during object creation, after setting all properties.
 function windPowerText_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to windPowerText (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
 
-
-% --- Executes on slider movement.
 function windAngleSlider_Callback(hObject, eventdata, handles)
-% hObject    handle to windAngleSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 value = get(hObject,'Value');
 
 handles.windAngleText.String = value;
 
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
-
-% --- Executes during object creation, after setting all properties.
 function windAngleSlider_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to windAngleSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
 
-
-
 function windAngleText_Callback(hObject, eventdata, handles)
-% hObject    handle to windAngleText (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 max= handles.windAngleSlider.Max;
 min= handles.windAngleSlider.Min;
 
@@ -399,31 +236,12 @@ handles.windAngleSlider.Value = value;
 
 guidata(hObject,handles);
 
-% Hints: get(hObject,'String') returns contents of windAngleText as text
-%        str2double(get(hObject,'String')) returns contents of windAngleText as a double
-
-
-% --- Executes during object creation, after setting all properties.
 function windAngleText_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to windAngleText (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
 
-
-% --- Executes on button press in multiPlot.
 function multiPlot_Callback(hObject, eventdata, handles)
-% hObject    handle to multiPlot (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of multiPlot
-
 val = get(hObject,'Value');
 
 if val
@@ -436,35 +254,14 @@ else
 end
 
 
-% --- Executes on selection change in plotCountMenu.
 function plotCountMenu_Callback(hObject, eventdata, handles)
-% hObject    handle to plotCountMenu (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns plotCountMenu contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from plotCountMenu
-
-
-% --- Executes during object creation, after setting all properties.
 function plotCountMenu_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to plotCountMenu (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
 
-
-% --- Executes on button press in plotButton.
 function plotButton_Callback(hObject, eventdata, handles)
-% hObject    handle to plotButton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
 if isempty(handles.Data.PlotGUI)
     handles.Data.PlotGUI = PlotGUI(hObject);
 end
@@ -476,22 +273,11 @@ plotHandles.Data.R = [];
 guidata(handles.Data.PlotGUI,plotHandles);
 guidata(hObject,handles)
 
-% --- Executes on button press in debugButton.
 function debugButton_Callback(hObject, eventdata, handles)
-% hObject    handle to debugButton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 keyboard
 
 
-% --- Executes when user attempts to close figure1.
 function figure1_CloseRequestFcn(hObject, eventdata, handles)
-% hObject    handle to figure1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: delete(hObject) closes the figure
-
 if ~isempty(handles.Data.PlotGUI)
    delete(handles.Data.PlotGUI);
 end
