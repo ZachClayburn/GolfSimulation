@@ -425,12 +425,10 @@ function multiPlot_Callback(hObject, eventdata, handles)
 val = get(hObject,'Value');
 
 if val
-   handles.plotCountMenu.Enable = 'on';
-   handles.plotCountMenu.String = {'2','3','4','5','6'};
+   handles.plotCountMenu.Enabled = 'On';
+   handles.plotCountMenu.String = {'2',
 else
-   handles.plotCountMenu.Enable = 'off';
-   handles.plotCountMenu.String = '1';
-   handles.plotCountMenu.Value = 1;
+    
 end
 
 
