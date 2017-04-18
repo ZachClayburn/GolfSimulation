@@ -22,7 +22,7 @@ function varargout = PlotGUI(varargin)
 
 % Edit the above text to modify the response to help PlotGUI
 
-% Last Modified by GUIDE v2.5 17-Apr-2017 23:50:33
+% Last Modified by GUIDE v2.5 18-Apr-2017 08:38:00
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,14 +54,11 @@ function PlotGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for PlotGUI
 handles.output = hObject;
 
+handles.Data.MainGUI = varargin{1};
+
 % Update handles structure
 guidata(hObject, handles);
 
-% This sets up the initial plot - only do when we are invisible
-% so window can get raised using PlotGUI.
-if strcmp(get(hObject,'Visible'),'off')
-    plot(rand(5));
-end
 
 % UIWAIT makes PlotGUI wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -84,7 +81,6 @@ function clearPlot_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 axes(handles.axis);
 cla;
-
 
 % --------------------------------------------------------------------
 function FileMenu_Callback(hObject, eventdata, handles)
@@ -148,3 +144,20 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 set(hObject, 'String', {'plot(rand(5))', 'plot(sin(1:0.01:25))', 'bar(1:.5:10)', 'plot(membrane)', 'surf(peaks)'});
+
+
+% --- Executes during object deletion, before destroying properties.
+function figure1_DeleteFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+mainHandles = guidata(handles.Data.MainGUI);
+mainHandles.Data.PlotGUI = [];
+guidata(handles.Data.MainGUI,mainHandles);
+
+% --- Executes on button press in debug.
+function debug_Callback(hObject, eventdata, handles)
+% hObject    handle to debug (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+keyboard

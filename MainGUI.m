@@ -22,7 +22,7 @@ function varargout = MainGUI(varargin)
 
 % Edit the above text to modify the response to help MainGUI
 
-% Last Modified by GUIDE v2.5 17-Apr-2017 23:10:02
+% Last Modified by GUIDE v2.5 18-Apr-2017 08:37:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,7 +55,7 @@ function MainGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for MainGUI
 handles.output = hObject;
 
-handles.Data.PlotGui = [];
+handles.Data.PlotGUI = [];
 
 % Update handles structure
 guidata(hObject, handles);
@@ -464,8 +464,16 @@ function plotButton_Callback(hObject, eventdata, handles)
 % hObject    handle to plotButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-if isempty(handles.Data.PlotGUI)
-    handles.Data.PlotGUI = PlotGUI();
+cond = isempty(handles.Data.PlotGUI);
+if cond
+    handles.Data.PlotGUI = PlotGUI(hObject);
 end
-% keyboard
+
+guidata(hObject,handles)
+
+% --- Executes on button press in debugButton.
+function debugButton_Callback(hObject, eventdata, handles)
+% hObject    handle to debugButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+keyboard
