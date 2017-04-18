@@ -22,7 +22,7 @@ function varargout = MainGUI(varargin)
 
 % Edit the above text to modify the response to help MainGUI
 
-% Last Modified by GUIDE v2.5 18-Apr-2017 08:37:12
+% Last Modified by GUIDE v2.5 18-Apr-2017 12:14:34
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -477,3 +477,18 @@ function debugButton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 keyboard
+
+
+% --- Executes when user attempts to close figure1.
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: delete(hObject) closes the figure
+
+if ~isempty(handles.Data.PlotGUI)
+   delete(handles.Data.PlotGUI);
+end
+
+delete(hObject);
