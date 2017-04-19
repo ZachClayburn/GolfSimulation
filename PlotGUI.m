@@ -61,6 +61,14 @@ axes(handles.axis);
 cla;
 
 function plotStyle_Callback(hObject, eventdata, handles)
+mainHandles = guidata(handles.Data.MainGUI);
+if mainHandles.multiPlot.Value
+    plotNum = str2double(mainHandles.plotCountMenu.String{...
+        mainHandles.plotCountMenu.Value});
+else
+    plotNum = 1;
+end
+updatePlots(plotNum,hObject,handles);
 
 function plotStyle_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
@@ -103,16 +111,42 @@ holePosition = zeros(3,1);
 holePosition(1) = str2double(mainHandles.holeXDist.String);
 holePosition(3) = str2double(mainHandles.holeZDist.String);
 
+plotType = handles.plotStyle.String{handles.plotStyle.Value};
 
-xlim([-10,10]);
-ylim([0,1.2*holePosition(1)]);
+switch plotType
+    case 'X vs Y'
+        xCond = 1;
+        yCond = 2;
+        xlim([0,1.2*holePosition(1)]);
+        ylim([0,20]);
+    case 'X vs Z'
+        xCond = 3;
+        yCond = 1;
+        xlim([-15,15]);
+        ylim([0,1.2*holePosition(1)]);
+    case 'X vs t'
+        xCond = 13;
+        yCond = 1;
+        xlim([0,5]);
+        ylim([0,1.2*holePosition(1)]);
+    case 'Y vs t'
+        xCond = 13;
+        yCond = 2;
+        xlim([0,5]);
+        ylim([0,20]);
+    case '3D plot'
+        is3D = true;
+end
+
+% xlim([-10,10]);
+% ylim([0,1.2*holePosition(1)]);
 
 hold on
 hits = handles.Data.hits;
 for ind = 1:plotNum
     R = hits{ind};
     if ~isnan(R)
-        plot(R(:,3),R(:,1))
+        plot(R(:,xCond),R(:,yCond))
     end
 end
 hold off
