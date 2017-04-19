@@ -110,18 +110,30 @@ mainHandles = guidata(handles.Data.MainGUI);
 holePosition = zeros(3,1);
 holePosition(1) = str2double(mainHandles.holeXDist.String);
 holePosition(3) = str2double(mainHandles.holeZDist.String);
+handles.axis.XGrid = 'on';
+handles.axis.YGrid = 'on';
+
 
 plotType = handles.plotStyle.String{handles.plotStyle.Value};
+
+is3D = false;
+plotHole = false;
 
 switch plotType
     case 'X vs Y'
         xCond = 1;
         yCond = 2;
+        holeX = 1;
+        holeY = 3;
+        plotHole = true;
         xlim([0,1.2*holePosition(1)]);
         ylim([0,10]);
     case 'X vs Z'
         xCond = 3;
         yCond = 1;
+        holeX = 3;
+        holeY = 1;
+        plotHole = true;
         xlim([-50,50]);
         ylim([0,1.2*holePosition(1)]);
     case 'X vs t'
@@ -137,13 +149,39 @@ switch plotType
     case '3D plot'
         is3D = true;
 end
+    handles.axis.View = [0 90];
 
-hold on
-hits = handles.Data.hits;
-for ind = 1:plotNum
-    R = hits{ind};
-    if ~isnan(R)
-        plot(R(:,xCond),R(:,yCond))
+if ~is3D
+    hold on
+    if plotHole
+        plot(holePosition(holeX),holePosition(holeY),'Dg')
     end
+    hits = handles.Data.hits;
+    for ind = 1:plotNum
+        R = hits{ind};
+        if ~isnan(R)
+            plot(R(:,xCond),R(:,yCond))
+        end
+    end
+    hold off
+    
+else
+    xlim([0,1.2*holePosition(1)]);
+    ylim([-50,50]);
+    zlim([0,30])
+    handles.axis.View = [40 30];
+
+    hold on
+    plot3(holePosition(1),holePosition(3),holePosition(2),'Dg')
+    hits = handles.Data.hits;
+    for ind = 1:plotNum
+        R = hits{ind};
+        if ~isnan(R)
+            plot3(R(:,1),R(:,3),R(:,2))
+        end
+    end
+    hold off
+    xlabel('x')
+    ylabel('z')
+    zlabel('y')
 end
-hold off

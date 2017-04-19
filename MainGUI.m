@@ -284,7 +284,7 @@ end
 pwr = handles.powerSlider.Value;
 [velocity,spin] = club_strike(club,pwr);
 R0(10:12) = spin;
-velocity = velocity'
+velocity = velocity';
 
 windAngle = handles.windAngleSlider.Value*pi/180;
 windSpeed = handles.windPowerSlider.Value;
