@@ -138,9 +138,6 @@ switch plotType
         is3D = true;
 end
 
-% xlim([-10,10]);
-% ylim([0,1.2*holePosition(1)]);
-
 hold on
 hits = handles.Data.hits;
 for ind = 1:plotNum

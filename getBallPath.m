@@ -2,7 +2,7 @@ function [t,R] = getBallPath(R0)%figure out params
 tSpan = 0:.1:10;
 options = odeset('Events',@events);
 
-[t,R] = ode45(@(t,R) odefun(t,R),tSpan,R0,options);
+[t,R] = ode45(@(t,R) odefun(t,R),tSpan,R0);
 
 function [value,isterminal,direction] = events(t,R)
 % Locate the time when height passes through zero in a decreasing direction
@@ -14,7 +14,7 @@ direction = -1; % negative direction
 function RPrime = odefun(~,R)
 
 mass = 0.0459;
-diameter = 0.427;
+diameter = 0.0427;
 area = pi()*(diameter/2)^2;
 density = 1.225;
 CDrag = 0.3;
@@ -23,12 +23,25 @@ dragNum = CDrag / (2*mass) * density * area;
 mangusNum = diameter * density * area / (4*mass);
 RPrime = zeros(12,1);
 
-RPrime(1) = R(4) + R(7);
-RPrime(2) = R(5) + R(8);
-RPrime(3) = R(6) + R(9);
-RPrime(4) = -dragNum*R(4)*abs(R(4)) + mangusNum*(R(11)*R(9) - R(12)*R(8));
-RPrime(5) = -g - dragNum*R(5)*abs(R(5)) + mangusNum*(R(12)*R(7) - R(10)*R(9));
-RPrime(6) = -dragNum*R(6)*abs(R(6)) + mangusNum*(R(10)*R(8) - R(11)*R(7));
+x = 1;
+y = 2;
+z = 3;
+vRelx = 4;
+vRely = 5;
+vRelz = 6;
+windx = 7;
+windy = 8;
+windz = 9;
+omegax = 10;
+omegay = 11;
+omegaz = 12;
+
+RPrime(1) = R(vRelx) + R(windx);
+RPrime(2) = R(vRely) + R(windy);
+RPrime(3) = R(vRelz) + R(windz);
+RPrime(4) = -dragNum*R(vRelx)*abs(R(vRelx)) + mangusNum*(R(omegay)*R(vRelz) - R(omegaz)*R(vRely));
+RPrime(5) = -g - dragNum*R(vRely)*abs(R(vRely)) + mangusNum*(R(omegaz)*R(vRelx) - R(omegax)*R(vRelz));
+RPrime(6) = -dragNum*R(vRelz)*abs(R(vRelz)) + mangusNum*(R(omegax)*R(vRely) - R(omegay)*R(vRelx));
 RPrime(7) = 0;
 RPrime(8) = 0;
 RPrime(9) = 0;
