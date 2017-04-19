@@ -88,7 +88,7 @@ delete(hObject);
 
 function addToPlot(R0,angle,plotNum,hObject,handles)
 figure(hObject);
-R0 = rotateFrame(R0,angle);
+% R0 = rotateFrame(R0,angle);
 [t,R]=getBallPath(R0);
 R = rotateFrame(R,-angle);
 R(:,13)=t;

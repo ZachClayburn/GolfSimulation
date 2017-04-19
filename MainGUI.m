@@ -284,16 +284,19 @@ end
 pwr = handles.powerSlider.Value;
 [velocity,spin] = club_strike(club,pwr);
 R0(10:12) = spin;
+velocity = velocity'
 
 windAngle = handles.windAngleSlider.Value;
 windAngle = windAngle*pi/180;
 windSpeed = handles.windPowerSlider.Value;
 
+% strokeAngle = 
+
 wind = zeros(3,1);
 wind(1) = windSpeed * cos(windAngle);
 wind(3) = windSpeed * sin(windAngle);
 R0(7:9) = wind;
-vRel = velocity'-wind;
+vRel = velocity-wind;
 R0(4:6) = vRel;
 
 
@@ -306,7 +309,7 @@ plotGUI = handles.Data.PlotGUI;
 plotHandles = guidata(plotGUI);
 
 R0 = getInitialValues(handles);
-angle = handles.angleSlider.Value;
+angle = (handles.angleSlider.Value)*pi/180;
 if handles.multiPlot.Value
     plotNum = str2double(handles.plotCountMenu.String{handles.plotCountMenu.Value});
 else
