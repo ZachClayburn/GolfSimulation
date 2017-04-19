@@ -104,15 +104,15 @@ holePosition(1) = str2double(mainHandles.holeXDist.String);
 holePosition(3) = str2double(mainHandles.holeZDist.String);
 
 
-xlim([0,1.2*holePosition(1)]);
-ylim([0,10]);
+xlim([-10,10]);
+ylim([0,1.2*holePosition(1)]);
 
 hold on
 hits = handles.Data.hits;
 for ind = 1:plotNum
     R = hits{ind};
     if ~isnan(R)
-        plot(R(:,1),R(:,2))
+        plot(R(:,3),R(:,1))
     end
 end
 hold off

@@ -284,7 +284,7 @@ end
 pwr = handles.powerSlider.Value;
 [velocity,spin] = club_strike(club,pwr);
 R0(4:6) = velocity;
-R0(7:9) = spin;
+R0(10:12) = spin;
 
 windAngle = handles.windAngleSlider.Value;
 windAngle = windAngle*pi/180;
@@ -293,7 +293,7 @@ windSpeed = handles.windPowerSlider.Value;
 wind = zeros(3,1);
 wind(1) = windSpeed * cos(windAngle);
 wind(3) = windSpeed * sin(windAngle);
-R0(10:12) = wind;
+R0(7:9) = wind;
 
 
 function plotButton_Callback(hObject, eventdata, handles)
