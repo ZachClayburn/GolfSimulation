@@ -22,7 +22,7 @@ function varargout = MainGUI(varargin)
 
 % Edit the above text to modify the response to help MainGUI
 
-% Last Modified by GUIDE v2.5 18-Apr-2017 12:14:34
+% Last Modified by GUIDE v2.5 18-Apr-2017 22:22:09
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -307,7 +307,7 @@ plotHandles = guidata(plotGUI);
 R0 = getInitialValues(handles);
 angle = handles.angleSlider.Value;
 if handles.multiPlot.Value
-    plotNum = handles.plotCountMenu.String{handles.plotCountMenu.Value};
+    plotNum = str2double(handles.plotCountMenu.String{handles.plotCountMenu.Value});
 else
     plotNum = 1;
 end
@@ -326,3 +326,17 @@ if ~isempty(handles.Data.PlotGUI)
 end
 
 delete(hObject);
+
+function holeXDist_Callback(hObject, eventdata, handles)
+
+function holeXDist_CreateFcn(hObject, eventdata, handles)
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+function holeZDist_Callback(hObject, eventdata, handles)
+
+function holeZDist_CreateFcn(hObject, eventdata, handles)
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

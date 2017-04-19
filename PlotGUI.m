@@ -47,7 +47,7 @@ function PlotGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 handles.Data.MainGUI = varargin{1};
-handles.Data.hits = repmat({0},1,6);
+handles.Data.hits = repmat({NaN},1,6);
 handles.Data.plotNum = 1;
 
 guidata(hObject, handles);
@@ -91,6 +91,28 @@ end
 hits{1} = R;
 handles.Data.hits = hits;
 guidata(hObject,handles);
-gca
-plot(R(:,1),R(:,2))
-% keyboard
+updatePlots(plotNum,hObject,handles);
+
+function updatePlots(plotNum,hObject, handles)
+axis(handles.axis);
+cla;
+
+mainHandles = guidata(handles.Data.MainGUI);
+
+holePosition = zeros(3,1);
+holePosition(1) = str2double(mainHandles.holeXDist.String);
+holePosition(3) = str2double(mainHandles.holeZDist.String);
+
+
+xlim([0,1.2*holePosition(1)]);
+ylim([0,10]);
+
+hold on
+hits = handles.Data.hits;
+for ind = 1:plotNum
+    R = hits{ind};
+    if ~isnan(R)
+        plot(R(:,1),R(:,2))
+    end
+end
+hold off
