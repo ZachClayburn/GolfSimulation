@@ -47,11 +47,14 @@ function PlotGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 handles.Data.MainGUI = varargin{1};
+handles.Data.hits = repmat({0},1,6);
+handles.Data.plotNum = 1;
 
 guidata(hObject, handles);
 
 function varargout = PlotGUI_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
+varargout{2} = @addToPlot;
 
 function clearPlot_Callback(hObject, eventdata, handles)
 axes(handles.axis);
@@ -74,3 +77,20 @@ guidata(handles.Data.MainGUI,mainHandles);
 
 
 delete(hObject);
+
+function addToPlot(R0,angle,plotNum,hObject,handles)
+figure(hObject);
+R0 = rotateFrame(R0,angle);
+[t,R]=getBallPath(R0);
+R = rotateFrame(R,-angle);
+R(:,13)=t;
+hits = handles.Data.hits;
+for ind = 5:-1:1
+    hits{ind+1} = hits{ind};
+end
+hits{1} = R;
+handles.Data.hits = hits;
+guidata(hObject,handles);
+gca
+plot(R(:,1),R(:,2))
+% keyboard

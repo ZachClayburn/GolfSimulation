@@ -1,5 +1,5 @@
-function [t,R] = getBallPath(R0,tSpan)%figure out params
-
+function [t,R] = getBallPath(R0)%figure out params
+tSpan = 0:.1:10;
 options = odeset('Events',@events);
 
 [t,R] = ode45(@(t,R) odefun(t,R),tSpan,R0,options);

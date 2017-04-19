@@ -298,14 +298,22 @@ R0(10:12) = wind;
 
 function plotButton_Callback(hObject, eventdata, handles)
 if isempty(handles.Data.PlotGUI)
-    handles.Data.PlotGUI = PlotGUI(hObject);
+    [handles.Data.PlotGUI,handles.Data.addToPlot] = PlotGUI(hObject);
 end
 
-plotHandles = guidata(handles.Data.PlotGUI);
+plotGUI = handles.Data.PlotGUI;
+plotHandles = guidata(plotGUI);
 
-plotHandles.Data.R = getInitialValues(handles);
+R0 = getInitialValues(handles);
+angle = handles.angleSlider.Value;
+if handles.multiPlot.Value
+    plotNum = handles.plotCountMenu.String{handles.plotCountMenu.Value};
+else
+    plotNum = 1;
+end
+handles.Data.addToPlot(R0,angle,plotNum,plotGUI,plotHandles)
 
-guidata(handles.Data.PlotGUI,plotHandles);
+% guidata(handles.Data.PlotGUI,plotHandles);
 guidata(hObject,handles)
 
 function debugButton_Callback(hObject, eventdata, handles)
