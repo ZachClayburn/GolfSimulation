@@ -58,7 +58,9 @@ varargout{2} = @addToPlot;
 
 function clearPlot_Callback(hObject, eventdata, handles)
 axes(handles.axis);
+handles.Data.hits = repmat({NaN},1,6);
 cla;
+guidata(hObject,handles);
 
 function plotStyle_Callback(hObject, eventdata, handles)
 mainHandles = guidata(handles.Data.MainGUI);
@@ -82,8 +84,6 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 mainHandles = guidata(handles.Data.MainGUI);
 mainHandles.Data.PlotGUI = [];
 guidata(handles.Data.MainGUI,mainHandles);
-
-
 delete(hObject);
 
 function addToPlot(R0,angle,plotNum,hObject,handles)
@@ -118,7 +118,7 @@ switch plotType
         xCond = 1;
         yCond = 2;
         xlim([0,1.2*holePosition(1)]);
-        ylim([0,20]);
+        ylim([0,10]);
     case 'X vs Z'
         xCond = 3;
         yCond = 1;
@@ -133,7 +133,7 @@ switch plotType
         xCond = 13;
         yCond = 2;
         xlim([0,5]);
-        ylim([0,20]);
+        ylim([0,10]);
     case '3D plot'
         is3D = true;
 end
