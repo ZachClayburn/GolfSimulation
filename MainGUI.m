@@ -261,6 +261,41 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
+function R0 = getInitialValues(handles)
+
+R0 = zeros(12,1);
+
+clubString = handles.clubType.String;
+clubT = clubString{handles.clubType.Value};
+switch clubT
+    case 'Driver'
+        club = 'D';
+    case 'Wood'
+        numString = handles.clubNumber.String;
+        clubNum = numString{handles.clubNumber.Value};
+        club = strcat(clubNum,'W');
+    case 'Iron'
+        numString = handles.clubNumber.String;
+        clubNum = numString{handles.clubNumber.Value};
+        club = strcat(clubNum,'I');
+    case 'Pitching Wedge'
+        club = 'PW';
+end
+pwr = handles.powerSlider.Value;
+[velocity,spin] = club_strike(club,pwr);
+R0(4:6) = velocity;
+R0(7:9) = spin;
+
+windAngle = handles.windAngleSlider.Value;
+windAngle = windAngle*pi/180;
+windSpeed = handles.windPowerSlider.Value;
+
+wind = zeros(3,1);
+wind(1) = windSpeed * cos(windAngle);
+wind(3) = windSpeed * sin(windAngle);
+R0(10:12) = wind;
+
+
 function plotButton_Callback(hObject, eventdata, handles)
 if isempty(handles.Data.PlotGUI)
     handles.Data.PlotGUI = PlotGUI(hObject);
@@ -268,7 +303,7 @@ end
 
 plotHandles = guidata(handles.Data.PlotGUI);
 
-plotHandles.Data.R = [];
+plotHandles.Data.R = getInitialValues(handles);
 
 guidata(handles.Data.PlotGUI,plotHandles);
 guidata(hObject,handles)
