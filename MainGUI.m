@@ -286,15 +286,16 @@ pwr = handles.powerSlider.Value;
 R0(10:12) = spin;
 velocity = velocity'
 
-windAngle = handles.windAngleSlider.Value;
-windAngle = windAngle*pi/180;
+windAngle = handles.windAngleSlider.Value*pi/180;
 windSpeed = handles.windPowerSlider.Value;
 
-% strokeAngle = 
+strokeAngle = (handles.angleSlider.Value)*pi/180;
 
 wind = zeros(3,1);
-wind(1) = windSpeed * cos(windAngle);
-wind(3) = windSpeed * sin(windAngle);
+wind(1) = windSpeed;
+wind = rotateFrame(wind,strokeAngle-windAngle);
+% wind(1) = windSpeed * cos(-(windAngle-strokeAngle));
+% wind(3) = windSpeed * -sin(-(windAngle-strokeAngle));
 R0(7:9) = wind;
 vRel = velocity-wind;
 R0(4:6) = vRel;

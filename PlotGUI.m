@@ -122,7 +122,7 @@ switch plotType
     case 'X vs Z'
         xCond = 3;
         yCond = 1;
-        xlim([-15,15]);
+        xlim([-50,50]);
         ylim([0,1.2*holePosition(1)]);
     case 'X vs t'
         xCond = 13;

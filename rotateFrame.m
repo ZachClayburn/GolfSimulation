@@ -11,9 +11,7 @@ end
 function R = rotateTo(R,ang)
 rotate = [cos(ang) 0 sin(ang); 0 1 0; -sin(ang) 0 cos(ang)];
 
-for x = 1:3
-   R((1+x*3):(3+x*3),1) = rotate * R((1+x*3):(3+x*3),1);
-end
+R((1):(3),1) = rotate * R((1):(3),1);
 
 function R = rotateBack(R,ang)
 rotate = [cos(ang) 0 -sin(ang); 0 1 0; sin(ang) 0 cos(ang)];
