@@ -22,7 +22,7 @@ function varargout = PlotGUI(varargin)
 
 % Edit the above text to modify the response to help PlotGUI
 
-% Last Modified by GUIDE v2.5 18-Apr-2017 12:15:17
+% Last Modified by GUIDE v2.5 19-Apr-2017 16:43:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -113,11 +113,19 @@ holePosition(3) = str2double(mainHandles.holeZDist.String);
 handles.axis.XGrid = 'on';
 handles.axis.YGrid = 'on';
 
-
 plotType = handles.plotStyle.String{handles.plotStyle.Value};
 
 is3D = false;
 plotHole = false;
+hits = handles.Data.hits;
+
+if ~isnan(hits{1})
+    ballPosition = hits{1}(end,1:3);
+    dist = norm(ballPosition' - holePosition);
+    
+    handles.DistanceText.String = dist;
+    guidata(hObject,handles);
+end
 
 switch plotType
     case 'X vs Y'
@@ -156,7 +164,6 @@ if ~is3D
     if plotHole
         plot(holePosition(holeX),holePosition(holeY),'Dg')
     end
-    hits = handles.Data.hits;
     for ind = 1:plotNum
         R = hits{ind};
         if ~isnan(R)
@@ -173,7 +180,6 @@ else
 
     hold on
     plot3(holePosition(1),holePosition(3),holePosition(2),'Dg')
-    hits = handles.Data.hits;
     for ind = 1:plotNum
         R = hits{ind};
         if ~isnan(R)
